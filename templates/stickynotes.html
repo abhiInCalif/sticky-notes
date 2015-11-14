@@ -73,22 +73,20 @@ td     {
 
 <script>
     $(document).ready(function() {
-        var html = "<div class=\"txt-area\"><img src=\"/Users/davidpal/Desktop/hackathon/sticky-notes/static/images/sticky.jpeg\"></div>";
+        var html = "<div class=\"txt-area\"><textarea></textarea></div>";
         $("td").click(function() {
+            if( $(this).is('.ui-draggable-dragging')) {
+                return;
+            }
             if ($(this).find(".txt-area").length > 0) {
                 return false;
             }
             $(this).html(html);
             return true;
         });
+
+        $(".txt-area").draggable();
     });
-
-
-  $(function() {
-    $( "td" ).draggable();
-  });
-
-
 </script>
 
 
