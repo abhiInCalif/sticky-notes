@@ -9,7 +9,7 @@
 <!--</style>-->
 
 <!DOCTYPE html>
-<html lang="en">
+<lang="en">
 
 <!--<style>-->
  <!--body {-->
@@ -30,31 +30,99 @@
 .txt-area textarea{
     padding: 20px;
     text-align:left;
-    width:176px;
-    height:176px;
+    width:50px;
+    height:50px;
     background: url("/Users/davidpal/Desktop/hackathon/sticky-notes/static/images/sticky.jpeg");
     font-family: verdana;
-    font-size: 20px;
+    font-size: 12px;
  }
 
 
+#test{
+    background-color:red;
+    height:50px;
+    }
+
+td     {
+    height: 115px;
+    width: 115px;
+    border-right: 1.25px dashed;
+    border-bottom: 1.25px dashed;
+    padding: 2px;
+}
+
+.td-right {
+    height: 115px;
+    width: 115px;
+    border-bottom: 1.25px dashed;
+    border-right: none;
+    padding: 2px;
+}
+
+.tr-bottom td{
+    border-bottom: none;
+    }
 </style>
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script><script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 </head>
+
+
+<script>
+    $(document).ready(function() {
+        var html = "<div class=\"txt-area\"><img src=\"/Users/davidpal/Desktop/hackathon/sticky-notes/static/images/sticky.jpeg\"></div>";
+        $("td").click(function() {
+            if ($(this).find(".txt-area").length > 0) {
+                return false;
+            }
+            $(this).html(html);
+            return true;
+        });
+    });
+
+
+  $(function() {
+    $( "td" ).draggable();
+  });
+
+
+</script>
+
+
+
 <body>
 
-
-
-<div class = "txt-area">
-
-
-
-    <textarea rows = "4" cols = "45" name="stickytext"></textarea>
-
+<div id="test">
+   <p>hello </p>
 </div>
 
-
-
-
+    <table align = "center" >
+        <tr></tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="td-right"></td>
+        </tr><tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="td-right"></td>
+        </tr><tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="td-right"></td>
+        </tr><tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="td-right"></td>
+        </tr><tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="td-right"></td>
+        </tr><tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="td-right"></td>
+        </tr><tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="td-right"></td>
+        </tr><tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="td-right"></td>
+        </tr><tr>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="td-right"></td>
+        </tr><tr class="tr-bottom">
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="td-right"></td>
+        </tr>
+    </table>
 
 </body>
+
 </html>
