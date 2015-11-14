@@ -1,0 +1,6 @@
+#leftpanel{
+    float:left;
+    height:100%;
+    width: 25%;
+    left: -25%;
+}
