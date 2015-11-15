@@ -9,7 +9,7 @@
 <!--</style>-->
 
 <!DOCTYPE html>
-<lang="en">
+
 
 <!--<style>-->
  <!--body {-->
@@ -25,9 +25,9 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 <style>
-.txt-area textarea{
+.txt-area-container textarea{
     padding: 20px;
     text-align:left;
     width:50px;
@@ -36,6 +36,12 @@
     font-family: verdana;
     font-size: 12px;
  }
+
+.txt-area-container {
+    font-size:10px;
+    width: 100%;
+    height: 100%;
+}
 
 
 #test{
@@ -49,6 +55,7 @@ td     {
     border-right: 1.25px dashed;
     border-bottom: 1.25px dashed;
     padding: 2px;
+
 }
 
 .td-right {
@@ -62,42 +69,50 @@ td     {
 .tr-bottom td{
     border-bottom: none;
     }
+
+
 </style>
 
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script><script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-</head>
-
-
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
-    $(document).ready(function() {
-        var html = "<div class=\"txt-area\"><img src=\"/Users/davidpal/Desktop/hackathon/sticky-notes/static/images/sticky.jpeg\"></div>";
-        $("td").click(function() {
-            if ($(this).find(".txt-area").length > 0) {
-                return false;
-            }
-            $(this).html(html);
-            return true;
+$(document).ready(function() {
+    var html = "<div class=\"txt-area-container draggable\"><textarea></textarea></div>";
+    // <!--<textarea id=\"text\"></textarea>-->
+    // droppable({
+    //    drop: function(event, ui) {
+    //        var draggable_html = ui.draggable.parent().html();
+    //        $(this).html(draggable_html);
+    //        // remove the draggable element
+    //        ui.draggable.remove();
+    //    }
+    //})
+
+    function doDraggable() {
+        $(".draggable").draggable({
+         snap: false
         });
+        return false;
+    }
+    $("td").click(function() {
+        if( $(this).is('.ui-draggable-dragging')) {
+            return;
+        }
+        if ($(this).find(".txt-area").length > 0) {
+            return false;
+        }
+        $(this).html(html);
+        doDraggable();
+        return true;
     });
-
-
-  $(function() {
-    $( "td" ).draggable();
-  });
-
-
+});
 </script>
-
-
-
+</head>
 <body>
 
-<div id="test">
-   <p>hello </p>
-</div>
+<!--<div id="test">-->
+   <!--<p>hello </p>-->
+<!--</div>-->
 
     <table align = "center" >
         <tr></tr>
