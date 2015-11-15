@@ -9,7 +9,7 @@
 <!--</style>-->
 
 <!DOCTYPE html>
-< lang = "en">
+
 
 <!--<style>-->
  <!--body {-->
@@ -79,10 +79,20 @@ td     {
 $(document).ready(function() {
     var html = "<div class=\"txt-area-container draggable\"><textarea></textarea></div>";
     // <!--<textarea id=\"text\"></textarea>-->
+    // droppable({
+    //    drop: function(event, ui) {
+    //        var draggable_html = ui.draggable.parent().html();
+    //        $(this).html(draggable_html);
+    //        // remove the draggable element
+    //        ui.draggable.remove();
+    //    }
+    //})
 
     function doDraggable() {
         $(".draggable").draggable({
+         snap: false
         });
+        return false;
     }
     $("td").click(function() {
         if( $(this).is('.ui-draggable-dragging')) {
@@ -95,8 +105,6 @@ $(document).ready(function() {
         doDraggable();
         return true;
     });
-    var startPosTop = -1;
-    var startPostLeft = -1;
 });
 </script>
 </head>
