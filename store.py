@@ -47,7 +47,7 @@ class PostIt:
             'text': text,
             'x_pos': xpos,
             'y_pos': ypos,
-            'z_pos': zpos
+            'z_pos': zpos,
             'color': color,
             'picture': picture,
             'audio': audio,
