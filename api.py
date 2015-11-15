@@ -65,9 +65,9 @@ class ApiPostItFromSpaceTouch:
             print "Received tap: {0}".format(data)
             # Tap began, x:0.728088; y:0.500000; z:246.762131
             whitespace_split = data.split(" ")
-            xs = whitespace_split[2].split(":")[1][:3]
-            ys = whitespace_split[3].split(":")[1][:3]
-            zs = whitespace_split[4].split(":")[1][:3]
+            xs = whitespace_split[2].split(":")[1][:-1]
+            ys = whitespace_split[3].split(":")[1][:-1]
+            zs = whitespace_split[4].split(":")[1][:-1]
 
             text = "David's Friend is Awesome!"
             position = literal_eval("(" + xs + "," + ys + "," + zs + ")")
@@ -84,7 +84,7 @@ class BoardDetail:
     def GET(self):
         # shows the board page
         render = web.template.render('templates')
-        return render.board()
+        return render.stickynotes()
 
 if __name__ == "__main__":
     app = web.application(urls, globals())

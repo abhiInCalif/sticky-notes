@@ -1,38 +1,15 @@
-<!--<style type="text/css">-->
- <!--input{-->
-  <!--width:2200px;-->
-  <!--height:1050px;-->
-  <!--display:block;-->
-  <!--background:url(/users/davidpal/Desktop/images/sticky.jpg);-->
-  <!--border: none;-->
- <!--}-->
-<!--</style>-->
-
 <!DOCTYPE html>
-
-
-<!--<style>-->
- <!--body {-->
-      <!--text-align: center;-->
-      <!--background: url("http://dash.ga.co/assets/anna-bg.png");-->
-      <!--background-size: cover;-->
-      <!--background-position: center;-->
-      <!--color: white;-->
-      <!--font-family: helvetica;-->
-    <!--}-->
-<!--</style>-->
-
 <head>
     <meta charset="UTF-8">
     <title></title>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="/static/jquery-ui.css">
 <style>
 .txt-area-container textarea{
     padding: 20px;
     text-align:left;
     width:50px;
     height:50px;
-    background: url("/Users/davidpal/Desktop/hackathon/sticky-notes/static/images/sticky.jpeg");
+    background: url("/static/images/sticky.jpeg");
     font-family: verdana;
     font-size: 12px;
  }
@@ -77,47 +54,81 @@ table{
 
 </style>
 
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="/static/jquery.js"></script>
+<script src="/static/jquery-ui.js"></script>
 <script>
-$(document).ready(function() {
+$$(document).ready(function() {
     var html = "<div class=\"txt-area-container draggable\"><textarea></textarea></div>";
+    function getInjectHtml(text) {
+        var html = "<div class=\"txt-area-container draggable\"><textarea>" + text + "</textarea></div>";
+        return html;
+    }
     // <!--<textarea id=\"text\"></textarea>-->
     // droppable({
     //    drop: function(event, ui) {
     //        var draggable_html = ui.draggable.parent().html();
-    //        $(this).html(draggable_html);
+    //        $$(this).html(draggable_html);
     //        // remove the draggable element
     //        ui.draggable.remove();
     //    }
     //})
 
+    // when the document is ready we want to query the server for all the available
+    // post-its for the board that exists with ID:
+    // abhi1994/7d9d2cb8-8aaa-11e5-a3b2-a0999b160459
+    function getPostIts() {
+        var boardId = "abhi1994/7d9d2cb8-8aaa-11e5-a3b2-a0999b160459";
+        $$.get("/sticky/api/board?boardId=" + boardId + "&ownerId=abhi1994", function(data) {
+            debugger;
+            console.log(data);
+            postits = data.postits;
+            for (var i = 0; i < postits.length; i++) {
+                var html = getInjectHtml(postits[i].text);
+                var ypos_curr = postits[i].x_pos;
+                console.log("Current ypos incoming: " + ypos_curr);
+                if (ypos_curr < 0) {
+                    ypos_curr = 0;
+                }
+                if (ypos_curr > 1) {
+                    ypos_curr = 1;
+                }
+                console.log("Normalized ypos: " + ypos_curr);
+                var ypos = 10 - parseInt(ypos_curr * 10);
+                console.log("Adjusted to int: " + ypos);
+                //var ypos = (Math.abs(10 - parseInt(postits[i].y_pos * 10))) % 10;
+                var xpos = parseInt(Math.random() * 10);
+                var trs = $$("table").find("tr"); // returns list of trs
+                var row_to_insert = trs[ypos];
+                var tds = $$(row_to_insert).find("td"); // returns list of tds
+                var cell_to_insert = tds[xpos];
+                $$(cell_to_insert).html(html);
+            }
+        });
+    };
+
     function doDraggable() {
-        $(".draggable").draggable({
+        $$(".draggable").draggable({
          snap: false
         });
         return false;
     }
-    $("td").click(function() {
-        if( $(this).is('.ui-draggable-dragging')) {
+    $$("td").click(function() {
+        if( $$(this).is('.ui-draggable-dragging')) {
             return;
         }
-        if ($(this).find(".txt-area").length > 0) {
+        if ($$(this).find(".txt-area").length > 0) {
             return false;
         }
-        $(this).html(html);
+        $$(this).html(html);
         doDraggable();
         return true;
     });
+
+    getPostIts();
 });
 </script>
 </head>
 <body>
-
-<!--<div id="test">-->
-   <!--<p>hello </p>-->
-<!--</div>-->
-
     <table align = "center" >
         <tr></tr>
             <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="td-right"></td>
