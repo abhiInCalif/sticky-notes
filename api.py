@@ -9,6 +9,7 @@ urls = (
     '/sticky/board', 'BoardDetail',
     '/sticky/api/board', 'ApiBoard',
     '/sticky/api/postit', 'ApiPostIt',
+    '/sticky/api/postit/space', 'ApiPostItFromSpaceTouch',
 )
 
 
@@ -52,6 +53,31 @@ class ApiPostIt:
 
         data = store.PostIt.put(text, position, color, picture, audio, url, media_type, board_id)
         return json.dumps({'postit_id': data})
+
+class ApiPostItFromSpaceTouch:
+    def POST(self):
+        web.header('Content-type', 'application/json')
+        data = web.data()
+        if "Tap" not in data:
+            print "ignored"
+        else:
+            # we have a tap so lets do something with it.
+            print "Received tap: {0}".format(data)
+            # Tap began, x:0.728088; y:0.500000; z:246.762131
+            whitespace_split = data.split(" ")
+            xs = whitespace_split[2].split(":")[1][:3]
+            ys = whitespace_split[3].split(":")[1][:3]
+            zs = whitespace_split[4].split(":")[1][:3]
+
+            text = "David's Friend is Awesome!"
+            position = literal_eval("(" + xs + "," + ys + "," + zs + ")")
+            color = "red"
+            picture = "default"
+            audio = "default"
+            url = "default"
+            media_type = "default"
+            board_id = "abhi1994/7d9d2cb8-8aaa-11e5-a3b2-a0999b160459"
+            data = store.PostIt.put(text, position, color, picture, audio, url, media_type, board_id)
 
 
 class BoardDetail:

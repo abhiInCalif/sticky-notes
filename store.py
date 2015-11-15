@@ -40,13 +40,14 @@ class PostIt:
         # media_type is what allows the frontend to realize what the apropriate form to
         # display is.
         post_it_id = uuid.uuid1()
-        (xpos, ypos) = position
+        (xpos, ypos, zpos) = position
         doc = {
             '_id': '/' + str(board_id) + '/' + str(post_it_id),
             'board_id': str(board_id),
             'text': text,
             'x_pos': xpos,
             'y_pos': ypos,
+            'z_pos': zpos,
             'color': color,
             'picture': picture,
             'audio': audio,
